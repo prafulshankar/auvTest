@@ -89,8 +89,7 @@ for c in "gyr":
 	mask, res = color_mask(img, hsv_img, c)
 	maskres_dict[c] = [mask, res]
 
-# for each in maskres_dict:
-#  	cv2.imshow(each+' ig', maskres_dict[each][1])
+
 green_circles = get_circles('g')
 green_circles = np.round(green_circles[0,:]).astype("int")
 green_circles = extractMaxRadius(green_circles)
@@ -117,5 +116,4 @@ for each in circles_dict:
 					  +' r: '+str(i[2]), (i[0]-50,i[1]+40), cv2.FONT_HERSHEY_SIMPLEX, 0.4, \
 					  (0,0,0),2)
 cv2.imshow("image",img)
-
 cv2.waitKey(0)

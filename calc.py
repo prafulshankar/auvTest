@@ -9,7 +9,14 @@ def inToPostfix(expression):
 	expression = expression.replace(" ","")
 	new_exp = []
 	numeric_buffer = []
+	prev = ''
 	for each in expression:
+		if each not in "1234567890+-/()*":
+			print("invalid expression")
+			return "invalid syntax"
+		if prev in "+-*/" and each in "+-*/":
+			print("invalid expression")
+			return "invalid syntax"
 		if each in "+-()*/":
 			if numeric_buffer!=[]:
 				new_exp.append(int(''.join(numeric_buffer)))
@@ -17,6 +24,7 @@ def inToPostfix(expression):
 			new_exp.append(each)
 		else:
 			numeric_buffer.append(each)
+		prev = each
 	if numeric_buffer!=[]:
 		new_exp.append(int(''.join(numeric_buffer)))
 	expression = new_exp
@@ -74,7 +82,7 @@ def evaluate(postfix):
 #---------------BUILDING COMMAND LINE INTERFACE-----------------#
 print("In my calculator interface, enter any expression with or without brackets"\
 	+"\nYou will get three outputs on the screen:\n(1)Parsed Infix\n(2)Postfix\n3)Evalu"\
-	+"ated Postfix\n\nCtrl+d to quit")
+	+"ated Postfix\n\nCtrl+d to quit\n\n*NOTE: Division is floored")
 while(True):
 	inp = raw_input("Calc$ ")
 	h=inToPostfix(inp)
