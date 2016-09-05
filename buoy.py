@@ -89,24 +89,27 @@ for c in "gyr":
 	mask, res = color_mask(img, hsv_img, c)
 	maskres_dict[c] = [mask, res]
 
+circles_dict={}
 
 green_circles = get_circles('g')
-green_circles = np.round(green_circles[0,:]).astype("int")
-green_circles = extractMaxRadius(green_circles)
+if not green_circles is None:
+	green_circles = np.round(green_circles[0,:]).astype("int")
+	green_circles = extractMaxRadius(green_circles)
+	circles_dict['green'] = green_circles
 
 red_circles = get_circles('r')
-red_circles = np.round(red_circles[0,:]).astype("int")
-red_circles = extractMaxRadius(red_circles)
+if not red_circles is None:
+	red_circles = np.round(red_circles[0,:]).astype("int")
+	red_circles = extractMaxRadius(red_circles)
+	circles_dict['red'] = red_circles
 
 yellow_circles = get_circles('y')
-yellow_circles = np.round(yellow_circles[0,:]).astype("int")
-yellow_circles = extractMaxRadius(yellow_circles)
+if not yellow_circles is None:
+	yellow_circles = np.round(yellow_circles[0,:]).astype("int")
+	yellow_circles = extractMaxRadius(yellow_circles)
+	circles_dict['yellow'] = yellow_circles
 
-circles_dict={}
-circles_dict['red'] = red_circles
-circles_dict['yellow'] = yellow_circles
-circles_dict['green'] = green_circles
-
+print(circles_dict) 
 for each in circles_dict:
 	i = circles_dict[each]
 	cv2.circle(img,(i[0],i[1]),i[2],(0,255,0),2)
