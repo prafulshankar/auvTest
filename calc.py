@@ -7,6 +7,8 @@ import re
 #---------------START OF CALCULATOR METHODS-----------------#
 def inToPostfix(expression):
 	expression = expression.replace(" ","")
+	open_count = 0
+	closed_count = 0
 	new_exp = []
 	numeric_buffer = []
 	prev = ''
@@ -18,6 +20,10 @@ def inToPostfix(expression):
 			print("invalid expression")
 			return "invalid syntax"
 		if each in "+-()*/":
+			if each == "(":
+				open_count+=1
+			if each == ")":
+				closed_count+=1
 			if numeric_buffer!=[]:
 				new_exp.append(int(''.join(numeric_buffer)))
 			numeric_buffer = []
@@ -25,6 +31,9 @@ def inToPostfix(expression):
 		else:
 			numeric_buffer.append(each)
 		prev = each
+	if open_count!=closed_count:
+		print("brackets mismatch")
+		return "invalid syntax"
 	if numeric_buffer!=[]:
 		new_exp.append(int(''.join(numeric_buffer)))
 	expression = new_exp
