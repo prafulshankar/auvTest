@@ -119,5 +119,5 @@ for each in circles_dict:
 					  +' r: '+str(i[2]), (i[0]-50,i[1]+40), cv2.FONT_HERSHEY_SIMPLEX, 0.4, \
 					  (0,0,0),2)
 cv2.imshow("targets", img)
-cv2.imwrite("target-buoys.jpg",img)
+cv2.imwrite("target-"+args["image"],img)
 cv2.waitKey(0)
